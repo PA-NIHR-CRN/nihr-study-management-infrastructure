@@ -15,7 +15,7 @@ locals {
 ## CLOUDWATCH ALARMS
 
 data "aws_sns_topic" "system_alerts" {
-  name = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts"
+  name = "${var.names["${var.env}"]["accountidentifiers"]}-sns-system-alerts-dev"
 }
 
 data "aws_sns_topic" "system_alerts_oat" {
