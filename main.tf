@@ -110,12 +110,12 @@ module "rds_aurora" {
   apply_immediately       = var.names["${var.env}"]["apply_immediately"]
 }
 
-# module "cognito" {
-#   source        = "./modules/cognito"
-#   env           = var.env
-#   system        = var.names["system"]
-#   userpool      = "profile-management"
-#   client_name   = "edge"
-#   account       = var.names["${var.env}"]["accountidentifiers"]
-#   provider-name = var.names["${var.env}"]["provider-name"]
-# }
+module "cognito" {
+  source        = "./modules/cognito"
+  env           = var.env
+  system        = var.names["system"]
+  userpool      = "rddi-profile-management"
+  client_name   = "edge"
+  account       = var.names["${var.env}"]["accountidentifiers"]
+  provider-name = var.names["${var.env}"]["provider-name"]
+}
