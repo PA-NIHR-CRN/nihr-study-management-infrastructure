@@ -11,7 +11,7 @@ variable "names" {
       "app"                           = "rddi-study-management"
       "backupretentionperiod"         = 7
       "engine"                        = "mysql"
-      "engine_version"                = "8.0.mysql_aurora.3.02.2"
+      "engine_version"                = "8.0.mysql_aurora.3.06.0"
       "instanceclass"                 = "db.serverless"
       "skip_final_snapshot"           = true
       "private_subnet_ids"            = ["subnet-036934130e6e171db", "subnet-08301b8a8d127a1e5", "subnet-04c549421f430d61f"] #private subnets
@@ -31,7 +31,7 @@ variable "names" {
       "lambda_memory"                 = 256
       "retention_period"              = 30
       "provider-name"                 = "ORCID"
-      "db_name"                       = "study_management"
+      "db_name"                       = "study_registry"
       "rds_password_secret_name"      = "nihrd-secret-dev-rds-aurora-mysql-study-management-admin-password"
       "stage_name"                    = "v1"
       "message_bus_topic"             = "nihrd-msk-dev-study-management-topic"
