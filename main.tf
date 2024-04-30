@@ -94,7 +94,7 @@ module "rds_aurora" {
   maintenance_window      = var.names["${var.env}"]["maintenancewindow"]
   grant_odp_db_access     = var.names["${var.env}"]["grant_odp_db_access"]
   subnet_group            = "${var.names["${var.env}"]["accountidentifiers"]}-rds-sng-${var.env}-public"
-  db_name                 = "study_management"
+  db_name                 = "study_registry"
   username                = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
   instance_count          = var.names["${var.env}"]["rds_instance_count"]
   az_zones                = var.names["${var.env}"]["az_zones"]
@@ -110,12 +110,12 @@ module "rds_aurora" {
   apply_immediately       = var.names["${var.env}"]["apply_immediately"]
 }
 
-module "cognito" {
-  source        = "./modules/cognito"
-  env           = var.env
-  system        = var.names["system"]
-  userpool      = "profile-management"
-  client_name   = "edge"
-  account       = var.names["${var.env}"]["accountidentifiers"]
-  provider-name = var.names["${var.env}"]["provider-name"]
-}
+# module "cognito" {
+#   source        = "./modules/cognito"
+#   env           = var.env
+#   system        = var.names["system"]
+#   userpool      = "profile-management"
+#   client_name   = "edge"
+#   account       = var.names["${var.env}"]["accountidentifiers"]
+#   provider-name = var.names["${var.env}"]["provider-name"]
+# }
