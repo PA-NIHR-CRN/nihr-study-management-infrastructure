@@ -3,7 +3,7 @@ variable "account" {
 }
 
 variable "system" {
-  default = "nsip"
+  default = "rddi"
 
 }
 

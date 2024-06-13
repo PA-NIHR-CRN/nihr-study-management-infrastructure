@@ -119,3 +119,10 @@ module "cognito" {
   account       = var.names["${var.env}"]["accountidentifiers"]
   provider-name = var.names["${var.env}"]["provider-name"]
 }
+
+module "study_mamngement_outbox_ecr" {
+  source    = "./modules/ecr"
+  repo_name = "${var.names["${var.env}"]["accountidentifiers"]}-${var.env}-${var.names["system"]}-ecr-repository"
+  env       = var.env
+  app       = var.names["${var.env}"]["app"]
+}
