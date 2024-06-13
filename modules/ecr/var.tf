@@ -2,10 +2,6 @@ variable "repo_name" {
 
 }
 
-variable "env" {
-
-}
-
 variable "account" {
   default = "nihrd"
 }
