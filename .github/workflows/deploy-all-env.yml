@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - RDD-1022-deploy-ecs
   workflow_dispatch:
 
 jobs:
