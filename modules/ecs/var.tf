@@ -48,13 +48,13 @@ variable "image_url" {
 #env
 variable "bootstrap_servers" {
 }
-variable "message_bus_topic"{
+variable "message_bus_topic" {
 }
-variable "db_password"{
+variable "db_password" {
 }
-variable "sleep_interval"{
+variable "sleep_interval" {
 }
-variable "instance_count"{
+variable "instance_count" {
 }
 variable "rds_cluster_endpoint" {
   type = string

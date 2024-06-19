@@ -30,7 +30,7 @@ data "aws_sns_topic" "system_alerts_service_desk" {
 
 data "aws_ecr_image" "outbox_processor_image" {
   repository_name = "nihrd-dev-rddi-study-management-ecr-repository"
-  most_recent       = true
+  most_recent     = true
 }
 
 module "api_gateway" {
@@ -141,23 +141,23 @@ module "study_mamngement_outbox_ecr" {
 }
 
 module "outbox_processor_ecs" {
-  source                 = "./modules/ecs"
-  account                = var.names["${var.env}"]["accountidentifiers"]
-  name                   = "${var.names["${var.env}"]["accountidentifiers"]}-${var.env}-${var.names["system"]}-ecs-outbox-processor"
-  env                    = var.env
-  system                 = var.names["system"]
-  vpc_id                 = var.names["${var.env}"]["vpcid"]
-  instance_count         = var.names["${var.env}"]["ecs_instance_count"]
-  ecs_subnets            = (var.names["${var.env}"]["private_subnet_ids"])
-  container_name         = "${var.names["${var.env}"]["accountidentifiers"]}-${var.env}-${var.names["system"]}-outbox-container"
-  image_url              = data.aws_ecr_image.outbox_processor_image.image_uri
-  bootstrap_servers      = var.names["${var.env}"]["bootstrap_servers"]
-  ecs_cpu                = var.names["${var.env}"]["ecs_cpu"]
-  ecs_memory             = var.names["${var.env}"]["ecs_memory"]
-  message_bus_topic      = var.names["${var.env}"]["message_bus_topic"]
-  sleep_interval         = var.names["${var.env}"]["sleep_interval"]
-  db_password            = jsondecode(data.aws_secretsmanager_secret_version.rds_db_secret.secret_string)["password"]
-  rds_cluster_endpoint   = module.rds_aurora.aurora_db_endpoint
-  db_name                = var.names["${var.env}"]["db_name"]
-  db_username            = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
+  source               = "./modules/ecs"
+  account              = var.names["${var.env}"]["accountidentifiers"]
+  name                 = "${var.names["${var.env}"]["accountidentifiers"]}-${var.env}-${var.names["system"]}-ecs-outbox-processor"
+  env                  = var.env
+  system               = var.names["system"]
+  vpc_id               = var.names["${var.env}"]["vpcid"]
+  instance_count       = var.names["${var.env}"]["ecs_instance_count"]
+  ecs_subnets          = (var.names["${var.env}"]["private_subnet_ids"])
+  container_name       = "${var.names["${var.env}"]["accountidentifiers"]}-${var.env}-${var.names["system"]}-outbox-container"
+  image_url            = data.aws_ecr_image.outbox_processor_image.image_uri
+  bootstrap_servers    = var.names["${var.env}"]["bootstrap_servers"]
+  ecs_cpu              = var.names["${var.env}"]["ecs_cpu"]
+  ecs_memory           = var.names["${var.env}"]["ecs_memory"]
+  message_bus_topic    = var.names["${var.env}"]["message_bus_topic"]
+  sleep_interval       = var.names["${var.env}"]["sleep_interval"]
+  db_password          = jsondecode(data.aws_secretsmanager_secret_version.rds_db_secret.secret_string)["password"]
+  rds_cluster_endpoint = module.rds_aurora.aurora_db_endpoint
+  db_name              = var.names["${var.env}"]["db_name"]
+  db_username          = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
 }

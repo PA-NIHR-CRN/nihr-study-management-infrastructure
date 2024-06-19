@@ -46,10 +46,10 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
     }
     environment = [
       { "name" : "MessageBus_BootstrapServers", "value" : "${var.bootstrap_servers}" },
-      { "name" : "Data__PasswordSecretName", "value" :  "${var.db_password}" },
-      { "name" : "MessageBus__Topic", "value" :  "${var.message_bus_topic}" },
-      { "name" : "Data__ConnectionString", "value" :  "server=${var.rds_cluster_endpoint};database=${var.db_name};user=${var.db_username}" },
-      { "name" : "OutboxProcessor__SleepInterval", "value" :  "${var.sleep_interval}" },
+      { "name" : "Data__PasswordSecretName", "value" : "${var.db_password}" },
+      { "name" : "MessageBus__Topic", "value" : "${var.message_bus_topic}" },
+      { "name" : "Data__ConnectionString", "value" : "server=${var.rds_cluster_endpoint};database=${var.db_name};user=${var.db_username}" },
+      { "name" : "OutboxProcessor__SleepInterval", "value" : "${var.sleep_interval}" },
 
     ]
   }])
