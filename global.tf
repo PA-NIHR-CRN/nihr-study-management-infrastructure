@@ -37,7 +37,7 @@ variable "names" {
       "message_bus_topic"             = "nihrd-msk-dev-study-management-topic"
       "message_bus_bootstrap_servers" = "b-1.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com"
       "apply_immediately"             = true
-      "sleep_interval"                = 30
+      "sleep_interval"                = "30"
       "ecs_cpu"                       = 512
       "ecs_memory"                    = 1024
       "bootstrap_servers"             = "b-1.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com:9092,b-2.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com:9092"
