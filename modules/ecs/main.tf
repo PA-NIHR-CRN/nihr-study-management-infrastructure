@@ -90,7 +90,7 @@ resource "aws_security_group" "sg-ecs" {
 }
 
 resource "aws_security_group_rule" "sg_rds_to_ecs_ingress_rule" {
-  security_group_id        = aws_security_group.sg-rds.id
+  security_group_id        = aws_security_group.sg-ecs.id
   type                     = "ingress"
   from_port                = 3306
   to_port                  = 3306
