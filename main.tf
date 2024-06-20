@@ -156,7 +156,7 @@ module "outbox_processor_ecs" {
   ecs_memory           = var.names["${var.env}"]["ecs_memory"]
   message_bus_topic    = var.names["${var.env}"]["message_bus_topic"]
   sleep_interval       = var.names["${var.env}"]["sleep_interval"]
-  db_password          = jsondecode(data.aws_secretsmanager_secret_version.rds_db_secret.secret_string)["password"]
+  db_password          = var.names["${var.env}"]["rds_password_secret_name"]
   rds_cluster_endpoint = module.rds_aurora.aurora_db_endpoint
   db_name              = var.names["${var.env}"]["db_name"]
   db_username          = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
