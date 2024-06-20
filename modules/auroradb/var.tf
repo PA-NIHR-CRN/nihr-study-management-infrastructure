@@ -96,6 +96,9 @@ variable "lambda_sg" {
 
 }
 
+variable "ecs_sg" {
+  
+}
 # variable "capacity" {
 #   default = null
 

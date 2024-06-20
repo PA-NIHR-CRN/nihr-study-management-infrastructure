@@ -43,6 +43,10 @@ variable "image_url" {
   type        = string
 }
 
+variable "rds_sg" {
+  
+}
+
 
 
 #env

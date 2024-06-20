@@ -84,6 +84,7 @@ data "aws_secretsmanager_secret_version" "terraform_secret_version" {
   secret_id = data.aws_secretsmanager_secret.terraform_secret.id
 }
 
+#RDS
 data "aws_secretsmanager_secret" "rds_db_secret" {
   name = var.names["${var.env}"]["rds_password_secret_name"]
 }
@@ -118,6 +119,7 @@ module "rds_aurora" {
   publicly_accessible     = var.names["${var.env}"]["publicly_accessible"]
   add_scheduler_tag       = var.names["${var.env}"]["add_scheduler_tag"]
   lambda_sg               = module.lambda.lambda_sg
+  ecs_sg                  = module.outbox_processor_ecs.ecs_sg
   odp_db_server_ip        = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["odp-db-server-ip"]
   ingress_rules           = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["ingress_rules"]
   apply_immediately       = var.names["${var.env}"]["apply_immediately"]
@@ -160,4 +162,5 @@ module "outbox_processor_ecs" {
   rds_cluster_endpoint = module.rds_aurora.aurora_db_endpoint
   db_name              = var.names["${var.env}"]["db_name"]
   db_username          = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
+  rds_sg               = module.rds_aurora.rds_sg
 }

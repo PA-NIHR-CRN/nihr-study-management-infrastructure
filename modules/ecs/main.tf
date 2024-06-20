@@ -89,6 +89,16 @@ resource "aws_security_group" "sg-ecs" {
   }
 }
 
+resource "aws_security_group_rule" "sg_rds_to_ecs_ingress_rule" {
+  security_group_id        = aws_security_group.sg-rds.id
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = var.rds_sg
+  description              = "rds-to-ecs"
+}
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.account}-ecs-service-${var.env}-${var.system}"
   cluster         = aws_ecs_cluster.ecs-cluster.id
