@@ -39,7 +39,8 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
           "logs:PutLogEvents",
           "lambda:InvokeFunction",
           "sqs:ReceiveMessage",
-          "kafka:*"
+          "kafka:*",
+          "secretsmanager:GetSecretValue"
         ]
         Effect   = "Allow"
         Resource = "*"
