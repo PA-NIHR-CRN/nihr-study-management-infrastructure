@@ -31,8 +31,8 @@ variable "names" {
       "lambda_memory"                 = 256
       "retention_period"              = 30
       "provider-name"                 = "ORCID"
-      "db_name"                       = "study_management"
-      "rds_password_secret_name"      = "nihrd-secret-dev-rds-aurora-mysql-study-management-admin-password"
+      "db_name"                       = "study_registry"
+      "rds_password_secret_name"      = "nihrd-secret-dev-rds-aurora-mysql-rddi-study-management-admin-password"
       "stage_name"                    = "v1"
       "message_bus_topic"             = "nihrd-msk-dev-study-management-topic"
       "message_bus_bootstrap_servers" = "b-1.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com"

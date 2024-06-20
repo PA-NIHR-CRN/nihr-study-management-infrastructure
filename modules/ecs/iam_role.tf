@@ -40,7 +40,11 @@ resource "aws_iam_role_policy" "task-execution-role-policy" {
           "lambda:InvokeFunction",
           "sqs:ReceiveMessage",
           "kafka:*",
-          "secretsmanager:GetSecretValue"
+          "secretsmanager:GetSecretValue",
+          "rds:Describe*",
+          "rds-data:ExecuteStatement",
+          "rds-db:connect"
+
         ]
         Effect   = "Allow"
         Resource = "*"
