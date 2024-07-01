@@ -164,3 +164,11 @@ module "outbox_processor_ecs" {
   db_username          = jsondecode(data.aws_secretsmanager_secret_version.terraform_secret_version.secret_string)["db-username"]
   rds_sg               = module.rds_aurora.rds_sg
 }
+
+module "ecs_autoscaling" {
+  source  = "./modules/autoscaling_group"
+  env     = var.env
+  system  = var.names["system"]
+  app     = var.names["app"]
+  account = var.names["${var.env}"]["accountidentifiers"]
+}
