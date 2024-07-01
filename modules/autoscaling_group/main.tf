@@ -2,7 +2,7 @@ resource "aws_appautoscaling_target" "my_service" {
   count              = var.env == "oat" || var.env == "prod" ? 0 : 1
   max_capacity       = 1
   min_capacity       = 1
-  resource_id        = "${var.account}-ecs-${var.env}-${var.system}-cluster/${var.account}-ecs-service-${var.env}-${var.system}"
+  resource_id        = "service/${var.account}-ecs-${var.env}-${var.system}-cluster/${var.account}-ecs-service-${var.env}-${var.system}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
   lifecycle {
