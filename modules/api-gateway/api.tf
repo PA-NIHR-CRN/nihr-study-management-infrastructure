@@ -54,6 +54,13 @@ resource "aws_iam_role_policy" "apigateway-role-policy" {
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        "Action" : [
+          "lambda:InvokeFunction"
+        ]
+        Effect   = "Allow"
+        Resource = ["arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:function:${var.account}-lambda-authorizer-*"]
+      },
     ]
   })
 }
@@ -108,35 +115,40 @@ resource "aws_api_gateway_method" "identifier_post" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.identifier.id
   http_method   = "POST"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 }
 
 resource "aws_api_gateway_method" "identifier_id_get" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.identifier_id.id
   http_method   = "GET"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 }
 
 resource "aws_api_gateway_method" "identifier_id_patch" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.identifier_id.id
   http_method   = "PATCH"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 }
 
 resource "aws_api_gateway_method" "home_get" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.home.id
   http_method   = "GET"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 }
 
 resource "aws_api_gateway_method" "home_authenticated_get" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   resource_id   = aws_api_gateway_resource.home_authenticated.id
   http_method   = "GET"
-  authorization = "NONE"
+  authorization = "CUSTOM"
+  authorizer_id = aws_api_gateway_authorizer.lambda_authorizer.id
 }
 
 # Define integrations
@@ -262,4 +274,14 @@ resource "aws_lambda_permission" "main" {
   qualifier     = var.function_alias_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.main.id}/*"
+}
+
+resource "aws_api_gateway_authorizer" "lambda_authorizer" {
+  name                             = "${var.account}-api-gateway-authorizer-${var.env}-${var.system}"
+  rest_api_id                      = aws_api_gateway_rest_api.main.id
+  authorizer_uri                   = aws_lambda_function.authorizer.invoke_arn
+  authorizer_credentials           = aws_iam_role.api_gateway_role.arn
+  authorizer_result_ttl_in_seconds = 0
+  type                             = "TOKEN"
+  identity_source                  = "method.request.header.Authorization"
 }

@@ -42,6 +42,9 @@ variable "names" {
       "ecs_memory"                    = 1024
       "bootstrap_servers"             = "b-1.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com:9092,b-2.nihrdmskdevnsipcluster.z2kr4f.c2.kafka.eu-west-2.amazonaws.com:9092"
       "ecs_instance_count"            = "1"
+      "wso2_service_audiences"        = "1t42eotpki9d6b5bl3n8all6ji"
+      "wso2_service_issuer"           = "https://dev.id.nihr.ac.uk:443/oauth2/token"
+      "wso2_service_token_endpoint"   = "https://dev.id.nihr.ac.uk:443/oauth2/token"
     }
   }
 }
