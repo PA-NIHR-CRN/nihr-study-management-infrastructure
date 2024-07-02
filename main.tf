@@ -34,14 +34,18 @@ data "aws_ecr_image" "outbox_processor_image" {
 }
 
 module "api_gateway" {
-  source              = "./modules/api-gateway"
-  account             = var.names["${var.env}"]["accountidentifiers"]
-  env                 = var.env
-  system              = var.names["system"]
-  invoke_lambda_arn   = module.lambda.study_management_invoke_alias_arn
-  stage_name          = var.names["${var.env}"]["stage_name"]
-  function_name       = module.lambda.function_name
-  function_alias_name = module.lambda.alias_name
+  source                      = "./modules/api-gateway"
+  account                     = var.names["${var.env}"]["accountidentifiers"]
+  env                         = var.env
+  system                      = var.names["system"]
+  invoke_lambda_arn           = module.lambda.study_management_invoke_alias_arn
+  stage_name                  = var.names["${var.env}"]["stage_name"]
+  function_name               = module.lambda.function_name
+  function_alias_name         = module.lambda.alias_name
+  wso2_service_audiences      = var.names["${var.env}"]["wso2_service_audiences"]
+  wso2_service_issuer         = var.names["${var.env}"]["wso2_service_issuer"]
+  wso2_service_token_endpoint = var.names["${var.env}"]["wso2_service_token_endpoint"]
+  retention_in_days           = var.names["${var.env}"]["retention_period"]
 
 }
 

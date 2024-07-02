@@ -27,3 +27,23 @@ variable "function_name" {
 variable "function_alias_name" {
 
 }
+
+//lambda authorizer
+variable "wso2_service_audiences" {
+  description = "Audience for the WSO2 service"
+  type        = string
+}
+
+variable "wso2_service_issuer" {
+  description = "Issuer for the WSO2 service"
+  type        = string
+}
+
+variable "wso2_service_token_endpoint" {
+  description = "Token endpoint for the WSO2 service"
+  type        = string
+}
+
+variable "retention_in_days" {
+  description = "Log retention in days"
+}

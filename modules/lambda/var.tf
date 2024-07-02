@@ -50,15 +50,15 @@ variable "db_username" {
   type = string
 }
 
-variable "rds_password_secret_name"{
+variable "rds_password_secret_name" {
   type = string
 }
 
-variable "message_bus_topic"{
+variable "message_bus_topic" {
   type = string
 }
 
-variable "message_bus_bootstrap_servers"{
-  
+variable "message_bus_bootstrap_servers" {
+
 }
 
