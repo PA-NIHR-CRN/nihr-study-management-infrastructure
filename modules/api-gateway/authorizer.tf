@@ -57,7 +57,7 @@ resource "aws_iam_role_policy_attachment" "lambda" {
 
 resource "aws_iam_policy" "lambda" {
   name   = "${var.account}-iam-${var.env}-${var.system}-lambda-auth-role-policy"
-  policy = data.aws_iam_policy_document.lambda.json
+  policy = data.aws_iam_policy_document.lambda_auth_role_assume_role_policy.json
   tags = {
     Name        = "${var.account}-iam-${var.env}-${var.system}-lambda-auth-role-policy"
     Environment = var.env
