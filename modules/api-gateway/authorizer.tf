@@ -1,12 +1,12 @@
 resource "aws_lambda_function" "authorizer" {
-  filename         = "./modules/.build/lambda_auth/lambda_auth.zip"
+  filename         = "./modules/.build/lambda_dummy/lambda_dummy.zip"
   function_name    = "${var.account}-lambda-authorizer-${var.env}-${var.system}"
   timeout          = 60
   role             = aws_iam_role.lambda_auth_role.arn
   handler          = "NIHR.StudyManagement.Api.Authorizer::NIHR.StudyManagement.Api.Authorizer.Function::FunctionHandler"
   publish          = true # don't need this if updating code outside of terrafrom
   runtime          = "dotnet6"
-  source_code_hash = filebase64sha256("./modules/.build/lambda_auth/lambda_auth.zip")
+  source_code_hash = filebase64sha256("./modules/.build/lambda_dummy/lambda_dummy.zip")
 
   environment {
     variables = {
