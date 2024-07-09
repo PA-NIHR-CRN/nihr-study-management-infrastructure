@@ -1,3 +1,7 @@
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
 resource "aws_lambda_function" "authorizer" {
   filename         = "./modules/.build/lambda_dummy/lambda_dummy.zip"
   function_name    = "${var.account}-lambda-authorizer-${var.env}-${var.system}"
@@ -42,7 +46,24 @@ resource "aws_cloudwatch_log_group" "this" {
 
 resource "aws_iam_role" "lambda_auth_role" {
   name               = "${var.account}-iam-${var.env}-${var.system}-lambda-auth-role"
-  assume_role_policy = data.aws_iam_policy_document.lambda_auth_role_assume_role_policy.json
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+				"Service": [
+				    "lambda.amazonaws.com",
+				    "events.amazonaws.com"
+			    ]
+      },
+      "Action": "sts:AssumeRole",
+      "Sid": ""
+    }
+  ]
+}
+EOF
   tags = {
     Name        = "${var.account}-iam-${var.env}-${var.system}-lambda-auth-role"
     Environment = var.env
@@ -66,13 +87,7 @@ resource "aws_iam_policy" "lambda" {
 }
 
 data "aws_iam_policy_document" "lambda_auth_role_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-  }
+
   statement {
     sid       = "AllowInvokingLambdas"
     effect    = "Allow"
