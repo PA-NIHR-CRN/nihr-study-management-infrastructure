@@ -1,7 +1,3 @@
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
 resource "aws_lambda_function" "authorizer" {
   filename         = "./modules/.build/lambda_dummy/lambda_dummy.zip"
   function_name    = "${var.account}-lambda-authorizer-${var.env}-${var.system}"
