@@ -16,9 +16,8 @@ jobs:
         uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: 'config'
-          hide-progress: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          hide-progress: false
+          format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
