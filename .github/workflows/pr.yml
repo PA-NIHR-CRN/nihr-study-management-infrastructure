@@ -44,3 +44,6 @@ jobs:
     - name: Terraform Plan
       run: |
            terraform plan -var="env=dev" 
+
+    - name: Scan IaC Code
+      uses: PA-NIHR-CRN/github-shared-workflows-and-actions/.github/actions/trivy-iac-scan@v1.1.0
